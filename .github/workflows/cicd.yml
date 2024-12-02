@@ -32,10 +32,10 @@ jobs:
         run: |
           npm install
           npx dt-app deploy
-        # env:
-          # DT_APP_OAUTH_CLIENT_ID: "${{ secrets.DT_APP_OAUTH_CLIENT_ID }}"
-          # DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
-          # DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
+        env:
+          DT_APP_OAUTH_CLIENT_ID: "${{ secrets.DT_APP_OAUTH_CLIENT_ID }}"
+          DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
+          DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
           # DEBUG: "true"
         working-directory: .
 
@@ -44,10 +44,10 @@ jobs:
         run: |
           npm install
           npx dt-app deploy --dry-run
-        # env:
-        #   DT_APP_OAUTH_CLIENT_ID: "${{ secrets.DT_APP_OAUTH_CLIENT_ID }}"
-        #   DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
-        #   DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
+        env:
+          DT_APP_OAUTH_CLIENT_ID: "${{ secrets.DT_APP_OAUTH_CLIENT_ID }}"
+          DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
+          DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
         #   DEBUG: "true"
         working-directory: .
       - name: Archive artifacts
