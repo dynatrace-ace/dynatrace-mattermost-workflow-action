@@ -40,7 +40,7 @@ jobs:
         working-directory: .
 
       - name: Build dt app for release
-        if: startsWith(github.ref, 'refs/tags/')
+        # if: startsWith(github.ref, 'refs/tags/')
         run: |
           npm install
           npx dt-app deploy --dry-run
@@ -51,14 +51,14 @@ jobs:
           DEBUG: "true"
         working-directory: .
       - name: Archive artifacts
-        if: startsWith(github.ref, 'refs/tags/')
+        # if: startsWith(github.ref, 'refs/tags/')
         uses: actions/upload-artifact@v4
         with:
           name: build-artifact
           path: ./out
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        # if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
             ./out/artifact.zip
