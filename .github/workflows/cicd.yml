@@ -25,7 +25,7 @@ jobs:
           #COMMIT_VERSION_FROM_GITHUB=$(echo $GITHUB_SHA | cut -c1-7)
           #jq '.app.version = "'$VERSION_FROM_JSON-$COMMIT_VERSION_FROM_GITHUB'"' app.config.json > app.config.ci.json && mv app.config.ci.json app.config.json
           cat app.config.json
-        working-directory: ./mattermost-app
+        working-directory: .
 
       - name: Deploy to DT CICD test environment
         run: |
