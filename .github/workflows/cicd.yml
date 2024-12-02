@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - "mattermost-app/**"
+      # - "mattermost-app/**"
       - ".github/**"
     tags:
       - "**"
@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Replace properties
         run: |
+          ls
           jq '.app.id = "my.dynatrace.mattermost.connector"' app.config.json > app.config.ci.json && mv app.config.ci.json app.config.json
           #VERSION_FROM_JSON=$(jq -r '.app.version' app.config.json)
           #COMMIT_VERSION_FROM_GITHUB=$(echo $GITHUB_SHA | cut -c1-7)
