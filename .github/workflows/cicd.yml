@@ -1,0 +1,63 @@
+name: CICD Pipeline
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "mattermost-app/**"
+      - ".github/**"
+    tags:
+      - "**"
+
+jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Replace properties
+        run: |
+          jq '.app.id = "my.dynatrace.mattermost.connector"' app.config.json > app.config.ci.json && mv app.config.ci.json app.config.json
+          #VERSION_FROM_JSON=$(jq -r '.app.version' app.config.json)
+          #COMMIT_VERSION_FROM_GITHUB=$(echo $GITHUB_SHA | cut -c1-7)
+          #jq '.app.version = "'$VERSION_FROM_JSON-$COMMIT_VERSION_FROM_GITHUB'"' app.config.json > app.config.ci.json && mv app.config.ci.json app.config.json
+          cat app.config.json
+        working-directory: ./mattermost-app
+
+      - name: Deploy to DT CICD test environment
+        run: |
+          npm install
+          npx dt-app deploy
+        # env:
+          # DT_APP_OAUTH_CLIENT_ID: "${{ secrets.DT_APP_OAUTH_CLIENT_ID }}"
+          # DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
+          # DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
+          # DEBUG: "true"
+        working-directory: ./mattermost-app
+
+      - name: Build dt app for release
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          npm install
+          npx dt-app deploy --dry-run
+        # env:
+        #   DT_APP_OAUTH_CLIENT_ID: "${{ secrets.DT_APP_OAUTH_CLIENT_ID }}"
+        #   DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
+        #   DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
+        #   DEBUG: "true"
+        working-directory: ./mattermost-app
+      - name: Archive artifacts
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: ./mattermost-app/out
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ./mattermost-app/out/artifact.zip
