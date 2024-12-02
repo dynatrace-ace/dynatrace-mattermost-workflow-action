@@ -1,0 +1,37 @@
+{
+  "environmentUrl": "https://pfz20492.sprint.apps.dynatracelabs.com/",
+  "icon": "./assets/mattermost-logomark.svg",
+  "app": {
+    "app.hidden": true,
+    "name": "mattermost",
+    "version": "0.0.3",
+    "description": "Workflow Action to integrate Dynatrace with Mattermost",
+    "id": "my.dynatrace.mattermost.connector",
+    "scopes": [
+      {
+        "name": "storage:logs:read",
+        "comment": "default template"
+      },
+      {
+        "name": "storage:buckets:read",
+        "comment": "default template"
+      },
+      {
+        "name": "app-settings:objects:read",
+        "comment": "To read app settings"
+      }
+    ],
+    "actions": [
+      {
+        "name": "posts",
+        "title": "Post",
+        "description": "Dynatrace workflow action to post a message to a Mattermost channel"
+      },
+      {
+        "name": "create-channel",
+        "title": "Create channel",
+        "description": "Dynatrace workflow action to create a new channel in Mattermost"
+      }
+    ]
+  }
+}
