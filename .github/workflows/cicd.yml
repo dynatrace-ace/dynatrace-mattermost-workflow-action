@@ -37,7 +37,7 @@ jobs:
           # DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
           # DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
           # DEBUG: "true"
-        working-directory: ./mattermost-app
+        working-directory: .
 
       - name: Build dt app for release
         if: startsWith(github.ref, 'refs/tags/')
@@ -49,16 +49,16 @@ jobs:
         #   DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
         #   DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
         #   DEBUG: "true"
-        working-directory: ./mattermost-app
+        working-directory: .
       - name: Archive artifacts
         if: startsWith(github.ref, 'refs/tags/')
         uses: actions/upload-artifact@v4
         with:
           name: build-artifact
-          path: ./mattermost-app/out
+          path: ./out
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ./mattermost-app/out/artifact.zip
+            ./out/artifact.zip
