@@ -36,7 +36,7 @@ jobs:
           DT_APP_OAUTH_CLIENT_ID: "${{ secrets.DT_APP_OAUTH_CLIENT_ID }}"
           DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
           DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
-          # DEBUG: "true"
+          DEBUG: "true"
         working-directory: .
 
       - name: Build dt app for release
@@ -48,7 +48,7 @@ jobs:
           DT_APP_OAUTH_CLIENT_ID: "${{ secrets.DT_APP_OAUTH_CLIENT_ID }}"
           DT_APP_OAUTH_CLIENT_SECRET: "${{ secrets.DT_APP_OAUTH_CLIENT_SECRET }}"
           DT_APP_ENVIRONMENT_URL: "${{ secrets.DT_APP_ENVIRONMENT_URL }}"
-        #   DEBUG: "true"
+          DEBUG: "true"
         working-directory: .
       - name: Archive artifacts
         if: startsWith(github.ref, 'refs/tags/')
