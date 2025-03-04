@@ -1,5 +1,8 @@
 # Dynatrace Mattermost Workflow Action
 
+> **Note**
+> This product is not officially supported by Dynatrace
+
 ## What is this?
 
 It is a Dynatrace Workflow Action integration between Dynatrace and Mattermost.
