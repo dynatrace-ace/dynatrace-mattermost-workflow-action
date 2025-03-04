@@ -8,7 +8,7 @@ It is a Dynatrace Workflow Action integration between Dynatrace and Mattermost.
 
 [Dynatrace](https://www.dynatrace.com/) is a software company that provides a comprehensive observability platform designed to monitor, analyze, and optimize application performance, IT infrastructure, and user experience.
 
-Dynatrace Workflows are powerful tools within the Dynatrace platform that allows you to automate and orchestrate various IT processes. Check [this](https://docs.dynatrace.com/docs/analyze-explore-automate/workflows/quickstart) example.
+[Dynatrace Workflows](https://docs.dynatrace.com/docs/analyze-explore-automate/workflows/quickstart) are powerful tools within the Dynatrace platform that allows you to automate and orchestrate various IT processes.
 
 [Dynatrace Workflow Action](https://docs.dynatrace.com/docs/analyze-explore-automate/workflows/default-workflow-actions) are reusable functions that can be configured and triggered within a workflow to perform specific tasks. Actions are the building blocks of workflows and can be used to automate various processes. 
 
